@@ -1,5 +1,12 @@
 <script setup>
 import { RouterLink, RouterView } from 'vue-router'
+import { ref, onMounted } from 'vue'
+import { useTodoStore } from '@/stores/todo'
+const todoStore = useTodoStore()
+
+onMounted(() => {
+  // todoStore.loadFromBackend()
+})
 </script>
 
 <template>
