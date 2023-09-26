@@ -21,9 +21,24 @@ const xyz = ref()
       </form>
       <button class="button" id="btn-delete-done">Erledigte löschen</button>
       <button class="button" id="btn-delete-all">Alle löschen</button>
+      <div class="filter-wrapper">
+        <label>Filter:</label>
+        <select name="filter" v-model="todoStore.state.currentFilter">
+          <option value="all">Alle</option>
+          <option value="done">erledigt</option>
+          <option value="open">unerledigt</option>
+        </select>
+      </div>
     </div>
-    {{ todoStore.count }}
-    {{ todoStore.state.name }}
+    {{ todoStore.getAllTodos() }}
+
+    <ul class="todo-list">
+      <li v-for="todo in todoStore.filteredTodos" :key="todo.id" class="todo-item">
+        <input :id="todo.id" type="checkbox" v-model="todo.done" class="checkbox" />
+        <label :for="todo.id" class="todo-description">{{ todo.description }}</label>
+        <!-- <button @click="deleteTodo(todo.id)">x</button> -->
+      </li>
+    </ul>
   </main>
 </template>
 
