@@ -7,6 +7,20 @@
   margin: 0;
 }
 
-body {
-  color: red;
+:root {
+  font-family: sans-serif;
+  --dark-blue: #073b4c;
+  --light-blue: #118ab2;
+  --green: #06d6a0;
+  --yellow: #f5ab00;
+  --turkis: #3ba396e3;
+  --light-grey: #f5f5f5;
+}
+
+h1 {
+  font-size: 3rem;
+  color: white;
+  text-shadow:
+    2px 2px var(--light-blue),
+    4px 4px var(--yellow);
 }

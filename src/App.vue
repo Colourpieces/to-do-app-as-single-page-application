@@ -4,13 +4,38 @@ import { RouterLink, RouterView } from 'vue-router'
 
 <template>
   <header>
-    <p>Header</p>
+    <h1>To Do App</h1>
     <nav>
+      <RouterLink to="/">Home</RouterLink>
       <RouterLink to="/">Home</RouterLink>
     </nav>
   </header>
-  <p>hallo</p>
   <RouterView />
 </template>
 
-<style scoped></style>
+<style scoped>
+header {
+  background-color: var(--dark-blue);
+
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+nav {
+  color: white;
+  grid-row: 2;
+  display: flex;
+  gap: 1rem;
+}
+
+.router-link:visited {
+  /*todo: funktioniert nicht. warum?? */
+  color: white;
+}
+
+.router-link:hover {
+  color: greenyellow; /*todo: funktioniert nicht. warum?? */
+}
+</style>
