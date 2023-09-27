@@ -11,52 +11,82 @@ function onAddTodo() {
   emit('addTodo', newTodo)
   newTodo.value = ''
 }
+
+const filteroptions = [
+  {
+    label: 'alle',
+    value: 'all',
+    description: 'alle anzeigen',
+    category: '1'
+  },
+  {
+    label: 'offen',
+    value: 'open',
+    description: 'offene anzeigen',
+    category: '1'
+  },
+  {
+    label: 'erledigt',
+    value: 'done',
+    description: 'erledigte anzeigen',
+    category: '1'
+  }
+]
+
+const selection = ref()
 </script>
 
 <template>
   <div class="toolbar">
     <form>
-      <label for="input-new-todo">neue Aufgabe:</label>
-      <input
-        class="input-new-todo"
-        id="input-new-todo"
-        type="text"
-        placeholder="du schaffst das!"
+      <q-input
+        filled
         v-model="newTodo"
+        label="neue Aufgabe"
+        placeholder="du schaffst das!"
+        :dense="true"
+        clearable
       />
-      <button
-        type="submit"
-        class="button"
-        id="btn-add-todo"
-        @click.prevent="onAddTodo()"
-        ref="addBtn"
-      >
-        +
-      </button>
+
+      <q-btn push color="primary" icon="add" @click.prevent="onAddTodo()" type="submit" />
     </form>
-    <button class="button" @click="todoStore.deleteDoneTodos()" id="btn-delete-done">
-      Erledigte löschen
-    </button>
-    <button class="button" @click="todoStore.deleteAllTodos()" id="btn-delete-all">
-      Alle löschen
-    </button>
-    <div class="filter-wrapper">
-      <label>Filter:</label>
-      <select name="filter" v-model="todoStore.state.currentFilter">
-        <option value="all">Alle</option>
-        <option value="done">erledigt</option>
-        <option value="open">unerledigt</option>
-      </select>
-    </div>
+    <q-btn
+      push
+      color="primary"
+      label="Erledigte löschen"
+      @click="todoStore.deleteDoneTodos()"
+      id="btn-delete-done"
+    />
+
+    <q-btn
+      push
+      color="primary"
+      label="Alle löschen"
+      @click="todoStore.deleteAllTodos()"
+      id="btn-delete-all"
+    />
+
+    <q-select
+      v-model="todoStore.state.currentFilter"
+      :options="filteroptions"
+      label="Filter"
+      filled
+      dense
+      style="min-width: 20ch"
+    />
   </div>
 </template>
 
 <style scoped>
+form {
+  display: flex;
+  justify-content: center;
+}
 .toolbar {
   display: flex;
   justify-content: space-around;
 
-  background-color: var(--light-blue);
+  /* background-color: var(--light-blue); */
   padding: 1rem;
 }
 </style>

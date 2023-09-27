@@ -4,7 +4,7 @@ import { defineStore } from 'pinia'
 export const useTodoStore = defineStore('todo', () => {
   const state = reactive({
     todos: [],
-    currentFilter: 'all'
+    currentFilter: { label: 'alle', value: 'all', description: 'alle anzeigen', category: '1' }
   })
 
   async function getAllTodos() {
@@ -69,11 +69,11 @@ export const useTodoStore = defineStore('todo', () => {
   }
 
   const filteredTodos = computed(() => {
-    if (state.currentFilter === 'done') {
+    if (state.currentFilter.value === 'done') {
       return state.todos.filter((todoItem) => todoItem.done === true)
     }
 
-    if (state.currentFilter === 'open') {
+    if (state.currentFilter.value === 'open') {
       return state.todos.filter((todoItem) => todoItem.done === false)
     }
     return state.todos
