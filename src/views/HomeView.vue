@@ -1,14 +1,15 @@
 <script setup>
 import { useTodoStore } from '@/stores/todo'
 import { ref } from 'vue'
+import toolbar from '@/components/toolbar.vue'
 const todoStore = useTodoStore()
 
-const newTodo = ref('')
+// const newTodo = ref('')
 
-const addBtn = ref() //nur zu testzwecken
+// const addBtn = ref() //nur zu testzwecken
 
 function addTodo(todo) {
-  addBtn.value.innerText = 'add' //nur zu testzwecken
+  // addBtn.value.innerText = 'add' //nur zu testzwecken
 
   const description = todo.trim()
   if (!description) {
@@ -28,48 +29,13 @@ function addTodo(todo) {
   }
 
   todoStore.postTodo(newTodoObject)
-  newTodo.value = ''
+  // newTodo.value = ''
 }
 </script>
 
 <template>
   <main>
-    <div class="toolbar">
-      <form>
-        <label for="input-new-todo">neue Aufgabe:</label>
-        <input
-          class="input-new-todo"
-          id="input-new-todo"
-          type="text"
-          placeholder="du schaffst das!"
-          v-model="newTodo"
-        />
-        <button
-          type="submit"
-          class="button"
-          id="btn-add-todo"
-          @click.prevent="addTodo(newTodo)"
-          ref="addBtn"
-        >
-          +
-        </button>
-      </form>
-      <button class="button" @click="todoStore.deleteDoneTodos()" id="btn-delete-done">
-        Erledigte löschen
-      </button>
-      <button class="button" @click="todoStore.deleteAllTodos()" id="btn-delete-all">
-        Alle löschen
-      </button>
-      <div class="filter-wrapper">
-        <label>Filter:</label>
-        <select name="filter" v-model="todoStore.state.currentFilter">
-          <option value="all">Alle</option>
-          <option value="done">erledigt</option>
-          <option value="open">unerledigt</option>
-        </select>
-      </div>
-    </div>
-
+    <toolbar @addTodo="(newTodo) => addTodo(newTodo.value)" />
     <ul class="todo-list">
       <li v-for="todo in todoStore.filteredTodos" :key="todo.id" class="todo-item">
         <input
@@ -87,13 +53,6 @@ function addTodo(todo) {
 </template>
 
 <style scoped>
-.toolbar {
-  display: flex;
-  justify-content: space-around;
-
-  background-color: var(--light-blue);
-  padding: 1rem;
-}
 .todo-list {
   padding-top: 2rem;
 }
