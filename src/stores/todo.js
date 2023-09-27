@@ -3,37 +3,22 @@ import { defineStore } from 'pinia'
 
 export const useTodoStore = defineStore('todo', () => {
   const state = reactive({
-    // todos: [
-    //   {
-    //     description: 'Wäsche Waschen',
-    //     done: true,
-    //     id: 1
-    //   },
-    //   {
-    //     description: 'learn Rest',
-    //     done: true,
-    //     id: 2
-    //   },
-    //   {
-    //     description: 'learn Vue',
-    //     done: false,
-    //     id: 3
-    //   }
-    // ],
     todos: [],
     currentFilter: 'all'
   })
 
-  async function loadFromBackend() {
+  // async function loadFromBackend() {
+  //   const resp = await fetch('http://localhost:4730/todos')
+  //   const data = await resp.json()
+  //   state.todos = data
+  // }
+
+  async function getAllTodos() {
+    // loadFromBackend()
     const resp = await fetch('http://localhost:4730/todos')
     const data = await resp.json()
     state.todos = data
-  }
-
-  async function getAllTodos() {
-    console.log('load all todos')
-    loadFromBackend()
-    return state.todos
+    // return state.todos
   }
 
   async function putTodo(id, todoLi) {
@@ -108,7 +93,7 @@ export const useTodoStore = defineStore('todo', () => {
     isDuplicate,
     postTodo,
     getAllTodos,
-    loadFromBackend,
+    // loadFromBackend,
     putTodo,
     deleteTodo,
     deleteDoneTodos,

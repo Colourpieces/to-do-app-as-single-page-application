@@ -5,7 +5,8 @@ import { useTodoStore } from '@/stores/todo'
 const todoStore = useTodoStore()
 
 onMounted(() => {
-  todoStore.loadFromBackend()
+  // todoStore.loadFromBackend()
+  todoStore.getAllTodos()
 })
 </script>
 
@@ -34,15 +35,18 @@ nav {
   color: white;
   grid-row: 2;
   display: flex;
-  gap: 1rem;
+  gap: 2rem;
 }
 
-.router-link:visited {
-  /*todo: funktioniert nicht. warum?? */
+a {
+  color: white;
+  text-decoration: none;
+}
+a:visited {
   color: white;
 }
 
-.router-link:hover {
-  color: greenyellow; /*todo: funktioniert nicht. warum?? */
+a:hover {
+  color: var(--yellow);
 }
 </style>
