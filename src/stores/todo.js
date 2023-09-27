@@ -28,24 +28,57 @@ export const useTodoStore = defineStore('todo', () => {
     const resp = await fetch('http://localhost:4730/todos')
     const data = await resp.json()
     state.todos = data
-    console.log(data)
   }
 
-  // async function putTodo(id, todoLi) {
-  //   const resp = await fetch("http://localhost:4730/todos/" + id, {
-  //     method: "PUT",
-  //     headers: { "Content-type": "application/json" },
-  //     body: JSON.stringify(todoLi),
-  //   });
-  //   const todos = await resp.json();
-  //   this.getToDos();
-  // },
-
   async function getAllTodos() {
-    // function getAllTodos() {
-    console.log('load data')
+    console.log('load all todos')
     loadFromBackend()
     return state.todos
+  }
+
+  async function putTodo(id, todoLi) {
+    const resp = await fetch('http://localhost:4730/todos/' + id, {
+      method: 'PUT',
+      headers: { 'Content-type': 'application/json' },
+      body: JSON.stringify(todoLi)
+    })
+    const todos = await resp.json()
+    getAllTodos()
+  }
+
+  async function postTodo(todoLi) {
+    const resp = await fetch('http://localhost:4730/todos/', {
+      method: 'POST',
+      headers: { 'Content-type': 'application/json' },
+      body: JSON.stringify(todoLi)
+    })
+    const newTodo = await resp.json()
+    getAllTodos()
+  }
+
+  async function deleteTodo(id) {
+    const resp = await fetch('http://localhost:4730/todos/' + id, {
+      method: 'DELETE',
+      headers: { 'Content-type': 'application/json' }
+    })
+    const data = await resp.json() //nur um zu prüfen ob HTTP Status ok ggf Fehlerhandling
+    getAllTodos()
+  }
+
+  function deleteDoneTodos() {
+    state.todos.forEach((currentTodo) => {
+      if (currentTodo.done === true) {
+        deleteTodo(currentTodo.id)
+      }
+    })
+    getAllTodos()
+  }
+
+  function deleteAllTodos() {
+    state.todos.forEach((currentTodo) => {
+      deleteTodo(currentTodo.id)
+    })
+    getAllTodos()
   }
 
   function isDuplicate(todoDescription) {
@@ -73,7 +106,12 @@ export const useTodoStore = defineStore('todo', () => {
     state,
     filteredTodos,
     isDuplicate,
+    postTodo,
     getAllTodos,
-    loadFromBackend
+    loadFromBackend,
+    putTodo,
+    deleteTodo,
+    deleteDoneTodos,
+    deleteAllTodos
   }
 })

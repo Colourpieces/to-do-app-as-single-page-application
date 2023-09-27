@@ -5,9 +5,7 @@ import { useTodoStore } from '@/stores/todo'
 const todoStore = useTodoStore()
 
 onMounted(() => {
-  console.log('es wird gemounted')
   todoStore.loadFromBackend()
-  console.log('mounten fertig')
 })
 </script>
 
