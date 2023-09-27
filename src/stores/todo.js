@@ -7,18 +7,10 @@ export const useTodoStore = defineStore('todo', () => {
     currentFilter: 'all'
   })
 
-  // async function loadFromBackend() {
-  //   const resp = await fetch('http://localhost:4730/todos')
-  //   const data = await resp.json()
-  //   state.todos = data
-  // }
-
   async function getAllTodos() {
-    // loadFromBackend()
     const resp = await fetch('http://localhost:4730/todos')
     const data = await resp.json()
     state.todos = data
-    // return state.todos
   }
 
   async function putTodo(id, todoLi) {
