@@ -30,7 +30,6 @@ const xyz = ref()
         </select>
       </div>
     </div>
-    {{ todoStore.getAllTodos() }}
 
     <ul class="todo-list">
       <li v-for="todo in todoStore.filteredTodos" :key="todo.id" class="todo-item">
@@ -49,5 +48,12 @@ const xyz = ref()
 
   background-color: var(--light-blue);
   padding: 1rem;
+}
+.todo-list {
+  padding-top: 2rem;
+}
+.todo-item {
+  list-style: none;
+  line-height: 150%;
 }
 </style>

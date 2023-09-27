@@ -3,24 +3,24 @@ import { defineStore } from 'pinia'
 
 export const useTodoStore = defineStore('todo', () => {
   const state = reactive({
-    todos: [
-      {
-        description: 'Wäsche Waschen',
-        done: true,
-        id: 1
-      },
-      {
-        description: 'learn Rest',
-        done: true,
-        id: 2
-      },
-      {
-        description: 'learn Vue',
-        done: false,
-        id: 3
-      }
-    ],
-    // todos: [],
+    // todos: [
+    //   {
+    //     description: 'Wäsche Waschen',
+    //     done: true,
+    //     id: 1
+    //   },
+    //   {
+    //     description: 'learn Rest',
+    //     done: true,
+    //     id: 2
+    //   },
+    //   {
+    //     description: 'learn Vue',
+    //     done: false,
+    //     id: 3
+    //   }
+    // ],
+    todos: [],
     currentFilter: 'all'
   })
 
@@ -41,9 +41,10 @@ export const useTodoStore = defineStore('todo', () => {
   //   this.getToDos();
   // },
 
-  // async function getAllTodos() {
-  function getAllTodos() {
-    // loadFromBackend()
+  async function getAllTodos() {
+    // function getAllTodos() {
+    console.log('load data')
+    loadFromBackend()
     return state.todos
   }
 
